@@ -1,0 +1,2 @@
+inflow_vel: -2.47
+omega: 4009

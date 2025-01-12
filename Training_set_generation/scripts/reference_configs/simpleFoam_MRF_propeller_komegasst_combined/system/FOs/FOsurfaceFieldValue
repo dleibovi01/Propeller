@@ -1,0 +1,27 @@
+surfaceFieldValue1
+{
+   // Mandatory entries (unmodifiable)
+    type            surfaceFieldValue;
+    libs            (fieldFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    fields          (p fD);
+    operation       none;
+    regionType      patch;
+    name            propellerGroup;
+
+    // Optional entries (runtime modifiable)
+    postOperation   none;
+    scaleFactor     1.0;
+    writeArea       true;
+    surfaceFormat   vtk;
+
+    // Optional (inherited) entries
+    writePrecision  8;
+    writeToFile     true;
+    //region          region0;
+    writeFields     true;
+    enabled         true;
+    log             true;
+
+}

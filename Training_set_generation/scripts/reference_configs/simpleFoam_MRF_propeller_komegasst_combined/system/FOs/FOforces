@@ -1,0 +1,20 @@
+forces1
+{
+    type            forces;
+    libs            ("libforces.so");
+    log             yes;
+    patches         (propellerGroup);
+    writeControl    timeStep; 
+    timeInterval    1;
+    rho             rhoInf; 
+    rhoInf          1.225;
+    CofR            (0 0 0);  // Axle midpoint on ground // TODO Confirm
+    pitchAxis       (0 1 0);
+
+    /*binData
+    {
+        nBin        20;
+        direction   (1 0 0);
+        cumulative  yes;
+    }*/
+}

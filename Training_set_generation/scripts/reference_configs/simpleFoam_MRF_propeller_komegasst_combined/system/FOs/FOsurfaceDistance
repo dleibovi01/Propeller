@@ -1,0 +1,39 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2206                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+surfaceDistance1
+{
+    // Mandatory entries
+    type            surfaceDistance;
+    libs            (fieldFunctionObjects);
+    geometry
+    {
+        propeller.stl
+        {
+            type triSurfaceMesh;
+            name aero_suv_1;
+        }    
+    }
+
+    // Optional entries
+    calculateCells  true;
+
+    // Optional (inherited) entries
+    region          region0;
+    enabled         true;
+    log             true;
+    //timeStart       0;
+    //timeEnd         1000;
+    //executeControl  writeTime;
+    //executeInterval -1;
+    //writeControl    writeTime;
+    //writeInterval   -1;
+}
+
+
+// ************************************************************************* //

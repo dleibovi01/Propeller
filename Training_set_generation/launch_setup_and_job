@@ -1,0 +1,101 @@
+#!/bin/sh
+
+# #SBATCH -N 1
+# #SBATCH -n 56
+# #SBATCH -p spr
+# #SBATCH -t 10:00:00
+
+# source ./personal_variables.sh
+# module load openfoam/v2312 # TODO: LOAD OPENFOAM MODULE
+
+# case=$1
+# cd $GEN_ROOT_DIR/scripts
+
+# bash create_inputs_detailed_case.sh $case
+# cd $case/simpleFoam_steady
+# bash run_all.sh
+
+# rm -r $GEN_ROOT_DIR/dataset/$case
+# mkdir $GEN_ROOT_DIR/dataset/$case
+# foamToVTK -latestTime
+# cp -r postProcessing $GEN_ROOT_DIR/dataset/$case
+# cp -r VTK $GEN_ROOT_DIR/dataset/$case
+# cp constant/triSurface/*.stl $GEN_ROOT_DIR/dataset/$case
+
+# cp log* $GEN_ROOT_DIR/dataset/$case
+# cp $GEN_ROOT_DIR/geometries/$case/* $GEN_ROOT_DIR/dataset/$case
+# tar cvzf $GEN_ROOT_DIR/dataset/$case.tgz $GEN_ROOT_DIR/datasets/parametric_cars/$case/
+
+# rm -r $GEN_ROOT_DIR/scripts/$case
+
+
+source ./personal_variables.sh
+export TIME="04:00:00"
+export account_name="coreai_modulus_cae"
+export case=$1
+export job_name="${account_name}-case${case}.dev"
+
+readonly _cont_image="gitlab-master.nvidia.com/modulus/solvers/gpu-openfoam-docker-build/amd64:cuda-12.4-0.1"
+readonly _cont_name="openfoam-dev"
+readonly _code_root="/lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation"
+readonly _cont_mounts="/lustre:/lustre"
+
+echo $account_name
+
+sbatch <<EOT
+#!/bin/sh
+#SBATCH --nodes=1
+#SBATCH --time=${TIME}  
+#SBATCH --account=${account_name}  
+#SBATCH --job-name=${job_name}
+#SBATCH --gpus-per-node=8
+#SBATCH -p "polar,polar2,polar3,polar4"
+
+srun --container-image="${_cont_image}" \
+     --container-name="${_cont_name}" \
+     --container-mounts="${_cont_mounts}" \
+     --container-workdir /lustre \
+     --no-container-entrypoint \
+     --mpi=pmix \
+     bash -c "
+     set -x
+     cd $GEN_ROOT_DIR/scripts
+     bash create_inputs_detailed_case.sh $case
+     cd $case/simpleFoam_steady
+     bash run_all.sh
+     rm -r $GEN_ROOT_DIR/dataset/$case
+     mkdir $GEN_ROOT_DIR/dataset/$case
+     foamToVTK -latestTime
+     cp -r postProcessing $GEN_ROOT_DIR/dataset/$case
+     cp -r VTK $GEN_ROOT_DIR/dataset/$case
+     cp constant/triSurface/*.stl $GEN_ROOT_DIR/dataset/$case
+     cp log* $GEN_ROOT_DIR/dataset/$case
+     cp $GEN_ROOT_DIR/geometries/$case/* $GEN_ROOT_DIR/dataset/$case
+     tar cvzf $GEN_ROOT_DIR/dataset/$case.tgz $GEN_ROOT_DIR/datasets/parametric_cars/$case/
+
+     ${@} "
+EOT
+
+
+
+#      rm -r $GEN_ROOT_DIR/scripts/$case  
+
+# bash create_inputs_detailed_case.sh $case
+# cd parametric_car_$case/simpleFoam_steady
+# bash run_all.sh
+
+# rm -r $GEN_ROOT_DIR/dataset/$case
+# mkdir $GEN_ROOT_DIR/dataset/$case
+# foamToVTK -latestTime
+# cp -r postProcessing $GEN_ROOT_DIR/dataset/$case
+# cp -r VTK $GEN_ROOT_DIR/dataset/$case
+# cp constant/triSurface/*.stl $GEN_ROOT_DIR/dataset/$case
+
+# cp log* $GEN_ROOT_DIR/dataset/$case
+# cp $GEN_ROOT_DIR/geometries/$case/* $GEN_ROOT_DIR/dataset/$case
+# tar cvzf $GEN_ROOT_DIR/dataset/$case.tgz $GEN_ROOT_DIR/datasets/parametric_cars/$case/
+
+# rm -r $GEN_ROOT_DIR/scripts/$case
+
+
+

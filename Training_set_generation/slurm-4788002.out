@@ -1,0 +1,144 @@
+pyxis: importing docker image: gitlab-master.nvidia.com/modulus/solvers/gpu-openfoam-docker-build/amd64:cuda-12.4-0.1
+pyxis: imported docker image: gitlab-master.nvidia.com/modulus/solvers/gpu-openfoam-docker-build/amd64:cuda-12.4-0.1
++ cd /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/scripts
++ bash create_inputs_detailed_case.sh 3
+/lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/scripts
+3
+rm: cannot remove '3': No such file or directory
+Traceback (most recent call last):
+  File "/lustre/fs12/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/scripts/3/create_mesh_inputs_case.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
++ cd 3/simpleFoam_steady
++ bash run_all.sh
+run_mesh_shm.sh: line 9: foamCleanTutorials: command not found
+run_mesh_shm.sh: line 13: surfaceFeatureExtract: command not found
+run_mesh_shm.sh: line 14: blockMesh: command not found
+run_mesh_shm.sh: line 15: topoSet: command not found
+run_mesh_shm.sh: line 19: decomposePar: command not found
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 32
+slots that were requested by the application:
+
+  snappyHexMesh
+
+Either request fewer slots for your application, or make more slots
+available for use.
+
+A "slot" is the Open MPI term for an allocatable unit where we can
+launch a process.  The number of slots available are defined by the
+environment in which Open MPI processes are run:
+
+  1. Hostfile, via "slots=N" clauses (N defaults to number of
+     processor cores if not provided)
+  2. The --host command line parameter, via a ":N" suffix on the
+     hostname (N defaults to 1 if not provided)
+  3. Resource manager (e.g., SLURM, PBS/Torque, LSF, etc.)
+  4. If none of a hostfile, the --host command line parameter, or an
+     RM is present, Open MPI defaults to the number of processor cores
+
+In all the above cases, if you want Open MPI to default to the number
+of hardware threads instead of the number of processor cores, use the
+--use-hwthread-cpus option.
+
+Alternatively, you can use the --oversubscribe option to ignore the
+number of available slots when deciding the number of processes to
+launch.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 32
+slots that were requested by the application:
+
+  snappyHexMesh
+
+Either request fewer slots for your application, or make more slots
+available for use.
+
+A "slot" is the Open MPI term for an allocatable unit where we can
+launch a process.  The number of slots available are defined by the
+environment in which Open MPI processes are run:
+
+  1. Hostfile, via "slots=N" clauses (N defaults to number of
+     processor cores if not provided)
+  2. The --host command line parameter, via a ":N" suffix on the
+     hostname (N defaults to 1 if not provided)
+  3. Resource manager (e.g., SLURM, PBS/Torque, LSF, etc.)
+  4. If none of a hostfile, the --host command line parameter, or an
+     RM is present, Open MPI defaults to the number of processor cores
+
+In all the above cases, if you want Open MPI to default to the number
+of hardware threads instead of the number of processor cores, use the
+--use-hwthread-cpus option.
+
+Alternatively, you can use the --oversubscribe option to ignore the
+number of available slots when deciding the number of processes to
+launch.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+There are not enough slots available in the system to satisfy the 32
+slots that were requested by the application:
+
+  checkMesh
+
+Either request fewer slots for your application, or make more slots
+available for use.
+
+A "slot" is the Open MPI term for an allocatable unit where we can
+launch a process.  The number of slots available are defined by the
+environment in which Open MPI processes are run:
+
+  1. Hostfile, via "slots=N" clauses (N defaults to number of
+     processor cores if not provided)
+  2. The --host command line parameter, via a ":N" suffix on the
+     hostname (N defaults to 1 if not provided)
+  3. Resource manager (e.g., SLURM, PBS/Torque, LSF, etc.)
+  4. If none of a hostfile, the --host command line parameter, or an
+     RM is present, Open MPI defaults to the number of processor cores
+
+In all the above cases, if you want Open MPI to default to the number
+of hardware threads instead of the number of processor cores, use the
+--use-hwthread-cpus option.
+
+Alternatively, you can use the --oversubscribe option to ignore the
+number of available slots when deciding the number of processes to
+launch.
+--------------------------------------------------------------------------
+run_mesh_shm.sh: line 26: reconstructParMesh: command not found
+rm: cannot remove 'processor*': No such file or directory
+run_mesh_shm.sh: line 33: checkMesh: command not found
+run_solver_shm.sh: line 7: topoSet: command not found
+run_solver_shm.sh: line 8: decomposePar: command not found
+--------------------------------------------------------------------------
+mpirun was unable to find the specified executable file, and therefore
+did not launch the job.  This error was first reported for process
+rank 0; it may have occurred for other processes as well.
+
+NOTE: A common cause for this error is misspelling a mpirun command
+      line parameter option (remember that mpirun interprets the first
+      unrecognized command line token as the executable).
+
+Node:       batch-block7-00251
+Executable: simpleFoam
+--------------------------------------------------------------------------
+32 total processes failed to start
+run_solver_shm.sh: line 12: reconstructPar: command not found
+run_solver_shm.sh: line 14: foamToVTK: command not found
++ rm -r /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3
++ mkdir /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3
++ foamToVTK -latestTime
+/usr/bin/bash: line 9: foamToVTK: command not found
++ cp -r postProcessing /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3
+cp: cannot stat 'postProcessing': No such file or directory
++ cp -r VTK /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3
+cp: cannot stat 'VTK': No such file or directory
++ cp constant/triSurface/propeller.stl /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3
++ cp log.blockMesh log.checkmesh log.shm log.shm_layering log.solver log.surfaceFeatures /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3
++ cp /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/geometries/3/case_info.txt /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/geometries/3/propeller.stl /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3
++ tar cvzf /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/dataset/3.tgz /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/datasets/parametric_cars/3/
+tar: Removing leading `/' from member names
+tar: /lustre/fsw/portfolios/nvr/users/dleibovici/git_repos/Propeller/Training_set_generation/datasets/parametric_cars/3: Cannot stat: No such file or directory
+tar: Exiting with failure status due to previous errors
++ 3
+/usr/bin/bash: line 17: 3: command not found
+srun: error: batch-block7-00251: task 0: Exited with exit code 127
+srun: Terminating StepId=4788002.0

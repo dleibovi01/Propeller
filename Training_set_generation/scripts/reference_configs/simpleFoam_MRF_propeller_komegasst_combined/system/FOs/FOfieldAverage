@@ -1,0 +1,60 @@
+fieldAverage
+{
+    // Mandatory entries (unmodifiable)
+    type            fieldAverage;
+    writeControl    writeTime;
+    libs            (fieldFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    fields
+    (
+        p
+        {
+            mean        yes;
+            prime2Mean  no;
+            base        iteration;
+        }
+        U
+        {
+            mean        yes;
+            prime2Mean  no;
+            base        iteration;
+       }
+       k
+       {
+            mean        yes;
+            prime2Mean  no;
+            base        iteration;
+       }
+       omega
+       {
+            mean        yes;
+            prime2Mean  no;
+            base        iteration;
+       }
+       nut
+       {
+            mean        yes;
+            prime2Mean  no;
+            base        iteration;
+       }
+
+    );
+
+    // Optional entries (runtime modifiable)
+    restartOnRestart    false;
+    restartOnOutput     false;
+    periodicRestart     false;
+    restartPeriod       0.002;
+
+    // Optional (inherited) entries
+    region          region0;
+    enabled         true;
+    log             true;
+    timeStart       500;
+    timeEnd         1000;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    timeStep;
+    writeInterval   100;
+ }
