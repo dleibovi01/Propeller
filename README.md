@@ -7,7 +7,7 @@ A framework for generating geometries and running RANS simulations for rotating 
 First, generate the cases by running:
 
 ```
-bash generate_cases [case_start] [case_end]
+bash generate_cases.sh [case_start] [case_end]
 ```
 
 This will generate test cases in the `geometry_generation/cases` directory. 
